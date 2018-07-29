@@ -1,0 +1,21 @@
+{
+    "name": "martin-becker/ip-projects-restposten",
+    "description": "Restposten API Wrapper für die IP-Projects Restposten API.",
+    "keywords": ["IP-Projects", "Restposten API"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Martin Becker",
+            "email": "martin.becker@becker-software.de"
+        }
+    ],
+    "type": "library",
+    "require": {
+		"php": ">=7.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "MartinBecker\\IPProjectsRestposten\\": "src/"
+        }
+    }
+}
