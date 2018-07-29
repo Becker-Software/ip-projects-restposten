@@ -11,6 +11,7 @@ class Api {
     protected $pass;
     public $user;
     public $url;
+	public $info;
     /**
      * Constructor Function
      * 
@@ -46,6 +47,6 @@ class Api {
         $this->info = curl_getinfo($c);
         curl_close ($c);
         
-        return $this->info;
+        return json_decode($this->json);
     }
 }
