@@ -47,6 +47,6 @@ class Api {
         $this->info = curl_getinfo($c);
         curl_close ($c);
         
-        return json_decode($this->json, true);
+        return json_decode($this->json);
     }
 }
