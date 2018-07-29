@@ -1,4 +1,5 @@
-<?php namespace MartinBecker\IPProjectsRestposten;
+<?php 
+namespace MartinBecker\IPProjectsRestposten;
 
 /**
 *  Restposten API Wrapper
@@ -18,19 +19,13 @@ class Api {
      */
     public function __construct($user,$pass)
     {
-        $url = "https://restposten.ip-projects.de/api/hardware";
-
-        $key = hash ('sha256', env('ipprojects-api-password') , false );
-        $data = env('ipprojects-api-user') . $url ;
-        $digest = hash_hmac ('sha256', $data , $key , false );
-
         $this->user = $user;
         $this->pass = $pass;
     }
 
     protected function authorize($user,$pass,$url) {
         $key = hash ('sha256', $pass , false );
-        $data = $user . "https://restposten.ip-projects.de/api/hardware";
+        $data = $user . $url;
         $digest = hash_hmac ('sha256', $data , $key , false );
         return $digest;
     }
@@ -40,9 +35,9 @@ class Api {
      * @var url Submit the last part of the url after /api/{your-call}
      */
     public function request($url) {
-        $this->url = $url = 'https://restposten.ip-projects.de/api/'. $url;
+        $this->url = 'https://restposten.ip-projects.de/api/'. $url;
         $digest = $this->authorize($this->user,$this->pass,$this->url);
-        header('Content-Type: application/json');
+
         $c = curl_init() ;
         curl_setopt ($c , CURLOPT_URL , $this->url );
         curl_setopt ($c , CURLOPT_HTTPHEADER , array ('AuthUser: '. $this->user , 'AuthDigest: ' . $digest ));
@@ -50,6 +45,7 @@ class Api {
         $this->json = $json = curl_exec ($c);
         $this->info = curl_getinfo($c);
         curl_close ($c);
+        
         return $this->info;
     }
 }
