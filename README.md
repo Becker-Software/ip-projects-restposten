@@ -11,7 +11,7 @@ composer require martin-becker/ip-projects-restposten
 ```
 ## Manually Source Code
 ```php
-include('/dir/to/Api.php');
+require_once('/dir/to/Api.php');
 ```
 # Examples
 ## List all Servers
